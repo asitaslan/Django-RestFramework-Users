@@ -1,7 +1,7 @@
 from profiller.models import Profil, ProfilDurum
 from rest_framework import serializers
 
-class ProfilSeriazlizer(serializers.ModelSerializer):
+class ProfilSerializer(serializers.ModelSerializer):
 
     user = serializers.StringRelatedField(read_only= True)
     foto = serializers.ImageField(read_only=True)

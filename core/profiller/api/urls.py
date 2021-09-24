@@ -1,10 +1,11 @@
 from django.urls import path, include
 
-from profiller.api.views import ProfilViewSet
+from profiller.api.views import ProfilViewSet, ProfiDurumViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'kullanici-profilleri', ProfilViewSet)
+router.register(r'durum', ProfiDurumViewSet)
 
 
 #profil_list = ProfilViewSet.as_view({'get': 'list'})

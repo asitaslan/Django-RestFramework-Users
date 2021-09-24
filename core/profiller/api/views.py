@@ -1,12 +1,28 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from profiller.models import Profil
-from profiller.api.serializers import ProfilSeriazlizer
+from profiller.models import Profil, ProfilDurum
+from profiller.api.serializers import ProfilSerializer, ProfilDurumSerializer
+from profiller.api.permissions import OwnProfileOrReadOnly, OwnDurumOrReadOnly
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from rest_framework import mixins
 
-class ProfilViewSet(ReadOnlyModelViewSet):
+
+class ProfilViewSet( mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin,
+                     GenericViewSet):
+
     queryset = Profil.objects.all()
-    serializer_class =  ProfilSeriazlizer
-    permission_classes = [IsAuthenticated]
+    serializer_class =  ProfilSerializer
+    permission_classes = [IsAuthenticated, OwnProfileOrReadOnly]
 
 
+class ProfiDurumViewSet(ModelViewSet):
+    queryset = ProfilDurum.objects.all()
+    serializer_class = ProfilDurumSerializer
+    permission_classes = [IsAuthenticated, OwnDurumOrReadOnly]
+
+    def perform_create(self, serializer):
+        user_profil = self.request.user.profil
+        serializer.save(user_profil= user_profil)
