@@ -6,6 +6,7 @@ from  PIL import  Image
 
 class Profil(models.Model):
 
+
     user = models.OneToOneField(User, on_delete= models.CASCADE, related_name= 'profil')
     bio = models.CharField(max_length= 300, blank= True, null= True)
     sehir = models.CharField(max_length= 120, blank= True, null= True)
