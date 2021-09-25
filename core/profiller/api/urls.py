@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'kullanici-profilleri', ProfilViewSet)
-router.register(r'durum', ProfiDurumViewSet)
+router.register(r'durum', ProfiDurumViewSet, basename='durum')
 
 
 #profil_list = ProfilViewSet.as_view({'get': 'list'})
