@@ -13,8 +13,6 @@ class ProfilSerializer(serializers.ModelSerializer):
 
 class ProfilFotoSerializer(serializers.ModelSerializer):
 
-
-
     class Meta:
         model = Profil
         fields = ['foto']
